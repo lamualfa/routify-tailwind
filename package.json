@@ -1,6 +1,5 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "routify-tailwind",
   "scripts": {
     "dev": "run-p routify rollup",
     "dev:nollup": "run-p routify nollup",
