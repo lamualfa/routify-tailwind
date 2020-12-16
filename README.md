@@ -4,7 +4,7 @@ Check out demo [Here](https://routify-tailwind.vercel.app/).
 
 ## Features
 
-- Styles Purging for Svelte component
+- Purging Styles in Svelte component
 
 ## Installation
 
