@@ -6,7 +6,7 @@ const svelteClassColonExtractor = (content) => {
 
 module.exports = {
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: !process.env.ROLLUP_WATCH,
     content: [
       './src/**/*.svelte',
       './src/**/*.html',
