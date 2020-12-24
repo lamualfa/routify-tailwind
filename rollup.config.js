@@ -9,6 +9,7 @@ import { spassr } from 'spassr'
 import getConfig from '@roxi/routify/lib/utils/config'
 import autoPreprocess from 'svelte-preprocess'
 import { injectManifest } from 'rollup-plugin-workbox'
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
 
 
 const { distDir } = getConfig() // use Routify's distDir for SSOT
@@ -37,59 +38,55 @@ const copyToDist = () => ({ writeBundle() { copySync(assetsDir, distDir) } })
 
 
 export default {
-    preserveEntrySignatures: false,
-    input: [`src/main.js`],
-    output: {
-        sourcemap: true,
-        format: 'esm',
-        dir: buildDir,
-        // for performance, disabling filename hashing in development
-        chunkFileNames:`[name]${production && '-[hash]' || ''}.js`
-    },
-    plugins: [
-        svelte({
-            dev: !production, // run-time checks      
-            // Extract component CSS — better performance
-            css: css => css.write(`bundle.css`),
-            hot: isNollup,
-            preprocess: [
-                autoPreprocess({
-                    postcss: { configFilePath: './postcss.config.js' },
-                    defaults: { style: 'postcss' }
-                })
-            ]
+  preserveEntrySignatures: false,
+  input: [`src/main.js`],
+  output: {
+    sourcemap: true,
+    format: 'esm',
+    dir: buildDir,
+    // for performance, disabling filename hashing in development
+    chunkFileNames: `[name]${(production && '-[hash]') || ''}.js`,
+  },
+  plugins: [
+    svelte({
+      dev: !production, // run-time checks
+      // Extract component CSS — better performance
+      css: (css) => css.write(`bundle.css`),
+      hot: isNollup,
+      preprocess: [
+        autoPreprocess({
+          postcss: { configFilePath: './postcss.config.js' },
+          defaults: { style: 'postcss' },
         }),
+      ],
+    }),
 
-        // resolve matching modules from current working directory
-        resolve({
-            browser: true,
-            dedupe: importee => !!importee.match(/svelte(\/|$)/)
-        }),
-        commonjs(),
+    // resolve matching modules from current working directory
+    resolve({
+      browser: true,
+      dedupe: (importee) => !!importee.match(/svelte(\/|$)/),
+    }),
+    commonjs(),
 
-        production && terser(),
-        !production && !isNollup && serve(),
-        !production && !isNollup && livereload(distDir), // refresh entire window when code is updated
-        !production && isNollup && Hmr({ inMemory: true, public: assetsDir, }), // refresh only updated code
-        {
-            // provide node environment on the client
-            transform: code => ({
-                code: code.replace('process.env.NODE_ENV', `"${process.env.NODE_ENV}"`),
-                map: { mappings: '' }
-            })
-        },
-        injectManifest({
-            globDirectory: assetsDir,
-            globPatterns: ['**/*.{js,css,svg}', '__app.html'],
-            swSrc: `src/sw.js`,
-            swDest: `dist/serviceworker.js`,
-            maximumFileSizeToCacheInBytes: 10000000, // 10 MB,
-            mode: 'production'
-        }),
-        production && copyToDist(),
-    ],
-    watch: {
-        clearScreen: false,
-        buildDelay: 100,
-    }
-}
+    production && terser(),
+    !production && !isNollup && serve(),
+    !production && !isNollup && livereload(distDir), // refresh entire window when code is updated
+    !production && isNollup && Hmr({ inMemory: true, public: assetsDir }), // refresh only updated code
+    injectProcessEnv({
+      NODE_ENV: production ? 'production' : 'development',
+    }),
+    injectManifest({
+      globDirectory: assetsDir,
+      globPatterns: ['**/*.{js,css,svg}', '__app.html'],
+      swSrc: `src/sw.js`,
+      swDest: `dist/serviceworker.js`,
+      maximumFileSizeToCacheInBytes: 10000000, // 10 MB,
+      mode: 'production',
+    }),
+    production && copyToDist(),
+  ],
+  watch: {
+    clearScreen: false,
+    buildDelay: 100,
+  },
+};
