@@ -23,3 +23,5 @@ The command above will create a new folder with the name `folder-name` which con
 ## Note
 
 **This template use _Tailwind CSS_ `v2.0.2`.** If you need the latest version, just run the command `yarn add tailwindcss` or `npm install tailwindcss` to update the Tailwind CSS.
+
+Special thank's to [dominikg/svite](https://github.com/dominikg/svite) for the Tailwind configuration file.
