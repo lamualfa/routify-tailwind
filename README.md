@@ -30,5 +30,7 @@ Special thank's to [dominikg/svite](https://github.com/dominikg/svite) for the T
 
 ## Related
 
-- [routify-twind](https://github.com/lamualfa/routify-twind) - Use Twind (_Tailwind CSS in JS version_) in Routify.
 - [routify-ts](https://github.com/lamualfa/routify-ts) - Use Typescript in Routify Project.
+- [routify-twind](https://github.com/lamualfa/routify-twind) - Use Twind (_Tailwind CSS in JS version_) in Routify.
+- [routify-carbon](https://github.com/lamualfa/routify-carbon) - Use IBM Carbon Framework in Routify.
+
