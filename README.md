@@ -32,5 +32,7 @@ Special thank's to [dominikg/svite](https://github.com/dominikg/svite) for the T
 
 - [routify-ts](https://github.com/lamualfa/routify-ts) - Use Typescript in Routify Project.
 - [routify-twind](https://github.com/lamualfa/routify-twind) - Use Twind (_Tailwind CSS in JS version_) in Routify.
+- [routify-windi](https://github.com/lamualfa/routify-windi) - Use Windi CSS (_Next generation of Tailwind CSS compiler_) in Routify.
 - [routify-carbon](https://github.com/lamualfa/routify-carbon) - Use IBM Carbon Framework in Routify.
+- [routify-vite](https://github.com/lamualfa/routify-vite) Use Vite (_Next Generation Frontend Tooling_) in Routify.
 
