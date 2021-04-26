@@ -35,4 +35,5 @@ Special thank's to [dominikg/svite](https://github.com/dominikg/svite) for the T
 - [routify-windi](https://github.com/lamualfa/routify-windi) - Use Windi CSS (_Next generation of Tailwind CSS compiler_) in Routify.
 - [routify-carbon](https://github.com/lamualfa/routify-carbon) - Use IBM Carbon Framework in Routify.
 - [routify-vite](https://github.com/lamualfa/routify-vite) Use Vite (_Next Generation Frontend Tooling_) in Routify.
+- [routify-vite-ts](https://github.com/lamualfa/routify-vite-ts) Use Vite (_Next Generation Frontend Tooling_) & Typescript in Routify.
 
